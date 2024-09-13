@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B42E3822C9405EF008AEB42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B42E3812C9405EF008AEB42 /* Assets.xcassets */; };
 		7726664A2C91CB8C004C22BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772666492C91CB8C004C22BB /* LoginViewController.swift */; };
 		7726664C2C91CC6D004C22BB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726664B2C91CC6D004C22BB /* SignUpViewController.swift */; };
 		7726664E2C91CEEE004C22BB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7726664D2C91CEEE004C22BB /* GoogleService-Info.plist */; };
@@ -21,11 +22,11 @@
 		7770B0972C86B65400C4B900 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770B0962C86B65400C4B900 /* SceneDelegate.swift */; };
 		7770B0992C86B65400C4B900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770B0982C86B65400C4B900 /* ViewController.swift */; };
 		7770B09C2C86B65400C4B900 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7770B09B2C86B65400C4B900 /* Base */; };
-		7770B09E2C86B65600C4B900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7770B09D2C86B65600C4B900 /* Assets.xcassets */; };
 		7770B0A12C86B65600C4B900 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7770B0A02C86B65600C4B900 /* Base */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B42E3812C9405EF008AEB42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		772666492C91CB8C004C22BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7726664B2C91CC6D004C22BB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		7726664D2C91CEEE004C22BB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -37,7 +38,6 @@
 		7770B0962C86B65400C4B900 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7770B0982C86B65400C4B900 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7770B09B2C86B65400C4B900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7770B09D2C86B65600C4B900 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7770B0A02C86B65600C4B900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7770B0A22C86B65600C4B900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,10 +85,10 @@
 				7726664B2C91CC6D004C22BB /* SignUpViewController.swift */,
 				7726665E2C9200F9004C22BB /* HomeViewController.swift */,
 				772666582C91D847004C22BB /* EditProfileViewController.swift */,
-				7770B09D2C86B65600C4B900 /* Assets.xcassets */,
 				7770B09F2C86B65600C4B900 /* LaunchScreen.storyboard */,
 				7770B0A22C86B65600C4B900 /* Info.plist */,
 				7726664D2C91CEEE004C22BB /* GoogleService-Info.plist */,
+				5B42E3812C9405EF008AEB42 /* Assets.xcassets */,
 			);
 			path = "Cooking-Instruction-App";
 			sourceTree = "<group>";
@@ -160,9 +160,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7770B09E2C86B65600C4B900 /* Assets.xcassets in Resources */,
 				7726664E2C91CEEE004C22BB /* GoogleService-Info.plist in Resources */,
 				7770B0A12C86B65600C4B900 /* Base in Resources */,
+				5B42E3822C9405EF008AEB42 /* Assets.xcassets in Resources */,
 				7770B09C2C86B65400C4B900 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

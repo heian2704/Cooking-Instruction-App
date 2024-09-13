@@ -12,36 +12,47 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!  // Make sure this IBOutlet is connected in your storyboard
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Rounded corners for text fields and button
+        emailTextField.layer.cornerRadius = 10
+        passwordTextField.layer.cornerRadius = 10
+        loginButton.layer.cornerRadius = 15
+        
+        // Enable clipping to bounds to ensure the corners are rounded
+        emailTextField.clipsToBounds = true
+        passwordTextField.clipsToBounds = true
+        loginButton.clipsToBounds = true
     }
 
     @IBAction func loginClick(_ sender: Any) {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
          
-         guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !email.isEmpty,
-               let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty else {
-             showAlert(message: "Please enter both email and password.")
-             return
-         }
+        guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !email.isEmpty,
+              let password = passwordTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), !password.isEmpty else {
+            showAlert(message: "Please enter both email and password.")
+            return
+        }
 
-         if !isValidEmail(email) {
-             showAlert(message: "Invalid email format.")
-             return
-         }
+        if !isValidEmail(email) {
+            showAlert(message: "Invalid email format.")
+            return
+        }
 
-         Auth.auth().signIn(withEmail: email, password: password) { result, error in
-             if let error = error {
-                 self.handleLoginError(error: error)
-                 return
-             }
+        Auth.auth().signIn(withEmail: email, password: password) { result, error in
+            if let error = error {
+                self.handleLoginError(error: error)
+                return
+            }
 
-             // Successfully signed in, navigate to MainTabBarController
-             self.navigateToTabBarController()
-         }
-     }
+            // Successfully signed in, navigate to MainTabBarController
+            self.navigateToTabBarController()
+        }
+    }
     func handleLoginError(error: Error) {
         let nsError = error as NSError
         let errorCode = AuthErrorCode(rawValue: nsError.code)
