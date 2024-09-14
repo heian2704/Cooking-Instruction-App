@@ -23,6 +23,9 @@
 		7770B0992C86B65400C4B900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770B0982C86B65400C4B900 /* ViewController.swift */; };
 		7770B09C2C86B65400C4B900 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7770B09B2C86B65400C4B900 /* Base */; };
 		7770B0A12C86B65600C4B900 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7770B0A02C86B65600C4B900 /* Base */; };
+		77D4352A2C9568EB0025F226 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D435292C9568EB0025F226 /* MapViewController.swift */; };
+		77D435332C9572F20025F226 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D435322C9572F20025F226 /* MapViewModel.swift */; };
+		77D435372C95746B0025F226 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D435362C95746B0025F226 /* CustomAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +43,9 @@
 		7770B09B2C86B65400C4B900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7770B0A02C86B65600C4B900 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7770B0A22C86B65600C4B900 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77D435292C9568EB0025F226 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		77D435322C9572F20025F226 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		77D435362C95746B0025F226 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,17 +86,44 @@
 				7770B0962C86B65400C4B900 /* SceneDelegate.swift */,
 				7770B0982C86B65400C4B900 /* ViewController.swift */,
 				7770B09A2C86B65400C4B900 /* Main.storyboard */,
-				7726665C2C91E34A004C22BB /* IconAppViewController.swift */,
-				772666492C91CB8C004C22BB /* LoginViewController.swift */,
-				7726664B2C91CC6D004C22BB /* SignUpViewController.swift */,
-				7726665E2C9200F9004C22BB /* HomeViewController.swift */,
+				77D4352D2C956A250025F226 /* Auth */,
+				77D4352E2C956A3F0025F226 /* Receipe */,
 				772666582C91D847004C22BB /* EditProfileViewController.swift */,
+				77D4352F2C956A520025F226 /* MapView */,
 				7770B09F2C86B65600C4B900 /* LaunchScreen.storyboard */,
 				7770B0A22C86B65600C4B900 /* Info.plist */,
 				7726664D2C91CEEE004C22BB /* GoogleService-Info.plist */,
 				5B42E3812C9405EF008AEB42 /* Assets.xcassets */,
 			);
 			path = "Cooking-Instruction-App";
+			sourceTree = "<group>";
+		};
+		77D4352D2C956A250025F226 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				7726665C2C91E34A004C22BB /* IconAppViewController.swift */,
+				7726664B2C91CC6D004C22BB /* SignUpViewController.swift */,
+				772666492C91CB8C004C22BB /* LoginViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		77D4352E2C956A3F0025F226 /* Receipe */ = {
+			isa = PBXGroup;
+			children = (
+				7726665E2C9200F9004C22BB /* HomeViewController.swift */,
+			);
+			path = Receipe;
+			sourceTree = "<group>";
+		};
+		77D4352F2C956A520025F226 /* MapView */ = {
+			isa = PBXGroup;
+			children = (
+				77D435292C9568EB0025F226 /* MapViewController.swift */,
+				77D435322C9572F20025F226 /* MapViewModel.swift */,
+				77D435362C95746B0025F226 /* CustomAnnotation.swift */,
+			);
+			path = MapView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,10 +211,13 @@
 				7726665D2C91E34A004C22BB /* IconAppViewController.swift in Sources */,
 				7770B0992C86B65400C4B900 /* ViewController.swift in Sources */,
 				7726665F2C9200F9004C22BB /* HomeViewController.swift in Sources */,
+				77D4352A2C9568EB0025F226 /* MapViewController.swift in Sources */,
 				772666592C91D847004C22BB /* EditProfileViewController.swift in Sources */,
+				77D435332C9572F20025F226 /* MapViewModel.swift in Sources */,
 				7770B0952C86B65400C4B900 /* AppDelegate.swift in Sources */,
 				7770B0972C86B65400C4B900 /* SceneDelegate.swift in Sources */,
 				7726664C2C91CC6D004C22BB /* SignUpViewController.swift in Sources */,
+				77D435372C95746B0025F226 /* CustomAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
