@@ -80,7 +80,11 @@ class LoginViewController: UIViewController {
             navigateToLoginScreen()
             return
         default:
-            errorMessage = "An unexpected error occurred. Please try again."
+            if nsError.code == 17004 {
+                errorMessage = "Incorrect password. Please try again."
+            } else {
+                errorMessage = "An unexpected error occurred. Please try again."
+            }
         }
         
         showAlert(message: errorMessage)

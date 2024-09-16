@@ -9,7 +9,7 @@ class MapViewModel {
 
     func fetchNearbyStores(coordinate: CLLocationCoordinate2D, completion: @escaping ([Store]) -> Void) {
         // Construct the query URL with bounding box and a query for grocery stores
-        let urlString = "\(nominatimUrl)?q=market&format=json&addressdetails=1&boundingbox=\(boundingBox)&countrycodes=TH"
+        let urlString = "\(nominatimUrl)?q=Market&format=json&addressdetails=1&boundingbox=\(boundingBox)&countrycodes=TH"
         
         guard let url = URL(string: urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!) else {
             completion([])
