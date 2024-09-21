@@ -13,7 +13,7 @@
         <!--Icon App View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="IconAppViewController" customModule="Cooking_Instruction_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IconAppViewController" id="BYZ-38-t0r" customClass="IconAppViewController" customModule="Cooking_Instruction_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +47,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Login"/>
                                                 <connections>
-                                                    <action selector="loginButtonTapped:" destination="BYZ-38-t0r" eventType="touchDragInside" id="tRj-Q7-XWk"/>
+                                                    <action selector="loginButtonTapped:" destination="BYZ-38-t0r" eventType="touchDragInside" id="fpv-9S-O5e"/>
                                                     <segue destination="LTY-yT-ZPG" kind="show" id="fXM-V4-2BI"/>
                                                 </connections>
                                             </button>
@@ -62,7 +62,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Sign-up"/>
                                                 <connections>
-                                                    <action selector="signUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchDragInside" id="EJ1-ba-sgI"/>
+                                                    <action selector="signUpButtonTapped:" destination="BYZ-38-t0r" eventType="touchDragInside" id="W78-jn-VM5"/>
                                                     <segue destination="x8f-66-YZ8" kind="show" id="iJi-1g-RSt"/>
                                                 </connections>
                                             </button>
@@ -83,6 +83,15 @@
                                 <color key="textColor" name="AccentColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ebu-fh-1Ks">
+                                <rect key="frame" x="157" y="775" width="79" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Google"/>
+                                <connections>
+                                    <action selector="googleSignInTapped:" destination="BYZ-38-t0r" eventType="touchDragInside" id="Dcm-ZN-iC3"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -99,11 +108,13 @@
                     </view>
                     <navigationItem key="navigationItem" id="3cY-Gn-G9u"/>
                     <connections>
-                        <outlet property="firstImageView" destination="2qQ-UC-Uby" id="fuQ-nR-Z1K"/>
-                        <outlet property="firstLabel" destination="y7V-nj-KWY" id="1Qk-7r-amc"/>
-                        <outlet property="loginButton" destination="ySu-Hu-PsN" id="S7s-gW-UmN"/>
-                        <outlet property="secondImageView" destination="CPc-C3-XPa" id="Cep-aE-8Ys"/>
-                        <outlet property="signUpButton" destination="lhk-Uk-lqc" id="vCH-Rz-Sjv"/>
+                        <outlet property="firstImageView" destination="2qQ-UC-Uby" id="D6U-8Y-WH2"/>
+                        <outlet property="firstLabel" destination="hOz-Mr-abf" id="8Xr-89-PpI"/>
+                        <outlet property="googleSignInButton" destination="Ebu-fh-1Ks" id="YCz-ZG-GQC"/>
+                        <outlet property="loginButton" destination="ySu-Hu-PsN" id="PYx-Vw-2Cz"/>
+                        <outlet property="secondImageView" destination="CPc-C3-XPa" id="TvS-SC-9dm"/>
+                        <outlet property="secondLabel" destination="y7V-nj-KWY" id="94y-NW-bCw"/>
+                        <outlet property="signUpButton" destination="lhk-Uk-lqc" id="u8d-bh-C9k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -289,6 +300,17 @@
                     <view key="view" contentMode="scaleToFill" id="xPs-Pr-4yZ">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZE-fN-mGG">
+                                <rect key="frame" x="154" y="376" width="86" height="43"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="SignOut"/>
+                                <connections>
+                                    <action selector="signOutButtonTapped:" destination="Mdn-h9-sea" eventType="touchDragInside" id="bnE-l6-FLM"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="04e-Vb-IX0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -527,10 +549,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

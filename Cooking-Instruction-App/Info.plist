@@ -23,5 +23,16 @@
     <string>We need your location to show nearby stores.</string>
     <key>NSLocationAlwaysUsageDescription</key>
     <string>We need your location to show nearby stores even when the app is in the background.</string>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.812245002285-on9uj8l4d92qlfhs27btufi0mqbcfltq</string>
+            </array>
+        </dict>
+    </array>
+    <key>GIDClientID</key>
+    <string>812245002285-on9uj8l4d92qlfhs27btufi0mqbcfltq.apps.googleusercontent.com</string>
 </dict>
 </plist>
