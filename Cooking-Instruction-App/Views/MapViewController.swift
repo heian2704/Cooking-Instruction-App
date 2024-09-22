@@ -23,6 +23,30 @@ class MapViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegat
         mapView.showsUserLocation = true
     }
     
+    // MARK: - Zoom In & Zoom Out
+    
+    @IBAction func zoomInTapped(_ sender: UIButton) {
+        let region = mapView.region
+        var newSpan = MKCoordinateSpan(latitudeDelta: region.span.latitudeDelta * 0.5,
+                                       longitudeDelta: region.span.longitudeDelta * 0.5)
+        // Set a minimum zoom level to avoid zooming in too much
+        newSpan.latitudeDelta = max(newSpan.latitudeDelta, 0.002)
+        newSpan.longitudeDelta = max(newSpan.longitudeDelta, 0.002)
+        
+        let newRegion = MKCoordinateRegion(center: region.center, span: newSpan)
+        mapView.setRegion(newRegion, animated: true)
+    }
+    
+    @IBAction func zoomOutTapped(_ sender: UIButton) {
+        let region = mapView.region
+        let newSpan = MKCoordinateSpan(latitudeDelta: region.span.latitudeDelta * 2.0,
+                                       longitudeDelta: region.span.longitudeDelta * 2.0)
+        let newRegion = MKCoordinateRegion(center: region.center, span: newSpan)
+        mapView.setRegion(newRegion, animated: true)
+    }
+    
+    // MARK: - UISearchBarDelegate
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let query = searchBar.text, !query.isEmpty else { return }
         viewModel.fetchStores(query: query) { [weak self] stores in
@@ -40,7 +64,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegat
             let annotation = CustomAnnotation(
                 coordinate: CLLocationCoordinate2D(latitude: store.lat, longitude: store.lon),
                 title: store.name,
-                subtitle: "" // Set subtitle to an empty string or some default value if needed
+                subtitle: ""
             )
             mapView.addAnnotation(annotation)
         }
@@ -90,7 +114,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, UISearchBarDelegat
             annotationView?.annotation = customAnnotation
         }
         
-        annotationView?.markerTintColor = .red // Set the marker color to red
+        annotationView?.markerTintColor = .red
         
         return annotationView
     }

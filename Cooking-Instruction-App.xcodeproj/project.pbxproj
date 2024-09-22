@@ -7,7 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B3987352CA044E5009C73F3 /* AddRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B3987342CA044E5009C73F3 /* AddRecipeViewController.swift */; };
 		5B42E3822C9405EF008AEB42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B42E3812C9405EF008AEB42 /* Assets.xcassets */; };
+		5B9248272C9EACF000C1A317 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5B9248262C9EACF000C1A317 /* Alamofire */; };
+		5B9248292C9EB73D00C1A317 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B9248282C9EB73D00C1A317 /* RecipeDetailViewController.swift */; };
+		5B92482B2C9EB75F00C1A317 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B92482A2C9EB75F00C1A317 /* HomeViewModel.swift */; };
+		5B92482D2C9EB78C00C1A317 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B92482C2C9EB78C00C1A317 /* Recipe.swift */; };
+		5BB0B4A22C9EA90C00483264 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5BB0B4A12C9EA90C00483264 /* SDWebImageSwiftUI */; };
+		5BB0B4A32C9EABF300483264 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 771AD09B2C9E8F1C0032034C /* GoogleService-Info.plist */; };
+		5BD8F6072C9FF0CE008F7ACA /* FavouriteRecipesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD8F6062C9FF0CE008F7ACA /* FavouriteRecipesManager.swift */; };
+		5BE09CB52C9F58C100533990 /* RecipeDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE09CB42C9F58C100533990 /* RecipeDetailViewModel.swift */; };
+		5BE859D22C9EBAFB00CDA9CA /* RecipeCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE859D12C9EBAFB00CDA9CA /* RecipeCardCell.swift */; };
+		5BE859D42C9EC88800CDA9CA /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE859D32C9EC88800CDA9CA /* CategoryCell.swift */; };
+		5BE859D62C9ECF2200CDA9CA /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE859D52C9ECF2200CDA9CA /* Category.swift */; };
 		771AD0842C9E89CC0032034C /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771AD0832C9E89CC0032034C /* UserModel.swift */; };
 		771AD0872C9E89ED0032034C /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771AD0862C9E89ED0032034C /* LoginViewModel.swift */; };
 		771AD08A2C9E8A1A0032034C /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771AD0892C9E8A1A0032034C /* SignUpViewModel.swift */; };
@@ -15,7 +27,6 @@
 		771AD0902C9E8AD40032034C /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771AD08F2C9E8AD40032034C /* AuthService.swift */; };
 		771AD0962C9E8D370032034C /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 771AD0952C9E8D370032034C /* GoogleSignIn */; };
 		771AD0982C9E8D370032034C /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 771AD0972C9E8D370032034C /* GoogleSignInSwift */; };
-		771AD09C2C9E8F1C0032034C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 771AD09B2C9E8F1C0032034C /* GoogleService-Info.plist */; };
 		7726664A2C91CB8C004C22BB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772666492C91CB8C004C22BB /* LoginViewController.swift */; };
 		7726664C2C91CC6D004C22BB /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726664B2C91CC6D004C22BB /* SignUpViewController.swift */; };
 		772666512C91CFA1004C22BB /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 772666502C91CFA1004C22BB /* FirebaseAuth */; };
@@ -37,13 +48,22 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B3987342CA044E5009C73F3 /* AddRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecipeViewController.swift; sourceTree = "<group>"; };
 		5B42E3812C9405EF008AEB42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5B9248282C9EB73D00C1A317 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
+		5B92482A2C9EB75F00C1A317 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		5B92482C2C9EB78C00C1A317 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		5BD8F6062C9FF0CE008F7ACA /* FavouriteRecipesManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRecipesManager.swift; sourceTree = "<group>"; };
+		5BE09CB42C9F58C100533990 /* RecipeDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewModel.swift; sourceTree = "<group>"; };
+		5BE859D12C9EBAFB00CDA9CA /* RecipeCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCardCell.swift; sourceTree = "<group>"; };
+		5BE859D32C9EC88800CDA9CA /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		5BE859D52C9ECF2200CDA9CA /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		771AD0832C9E89CC0032034C /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		771AD0862C9E89ED0032034C /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		771AD0892C9E8A1A0032034C /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
 		771AD08C2C9E8A6E0032034C /* IconAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconAppViewModel.swift; sourceTree = "<group>"; };
 		771AD08F2C9E8AD40032034C /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
-		771AD09B2C9E8F1C0032034C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		771AD09B2C9E8F1C0032034C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		772666492C91CB8C004C22BB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		7726664B2C91CC6D004C22BB /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		772666582C91D847004C22BB /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +88,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				771AD0962C9E8D370032034C /* GoogleSignIn in Frameworks */,
+				5B9248272C9EACF000C1A317 /* Alamofire in Frameworks */,
 				772666552C91D174004C22BB /* FirebaseDatabase in Frameworks */,
+				5BB0B4A22C9EA90C00483264 /* SDWebImageSwiftUI in Frameworks */,
 				772666572C91D174004C22BB /* FirebaseFirestore in Frameworks */,
 				771AD0982C9E8D370032034C /* GoogleSignInSwift in Frameworks */,
 				772666512C91CFA1004C22BB /* FirebaseAuth in Frameworks */,
@@ -84,6 +106,8 @@
 			children = (
 				771AD0832C9E89CC0032034C /* UserModel.swift */,
 				77FA21822C95D4AC00C25BB1 /* Store.swift */,
+				5B92482C2C9EB78C00C1A317 /* Recipe.swift */,
+				5BE859D52C9ECF2200CDA9CA /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -95,6 +119,9 @@
 				771AD0862C9E89ED0032034C /* LoginViewModel.swift */,
 				771AD0892C9E8A1A0032034C /* SignUpViewModel.swift */,
 				771AD08C2C9E8A6E0032034C /* IconAppViewModel.swift */,
+				5B92482A2C9EB75F00C1A317 /* HomeViewModel.swift */,
+				5BE09CB42C9F58C100533990 /* RecipeDetailViewModel.swift */,
+				5BD8F6062C9FF0CE008F7ACA /* FavouriteRecipesManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -107,6 +134,10 @@
 				772666492C91CB8C004C22BB /* LoginViewController.swift */,
 				7726665C2C91E34A004C22BB /* IconAppViewController.swift */,
 				77D435292C9568EB0025F226 /* MapViewController.swift */,
+				5B9248282C9EB73D00C1A317 /* RecipeDetailViewController.swift */,
+				5BE859D12C9EBAFB00CDA9CA /* RecipeCardCell.swift */,
+				5BE859D32C9EC88800CDA9CA /* CategoryCell.swift */,
+				5B3987342CA044E5009C73F3 /* AddRecipeViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -155,7 +186,6 @@
 				7770B0962C86B65400C4B900 /* SceneDelegate.swift */,
 				7770B0982C86B65400C4B900 /* ViewController.swift */,
 				7770B09A2C86B65400C4B900 /* Main.storyboard */,
-				77FA21842C95D50E00C25BB1 /* Home */,
 				772666582C91D847004C22BB /* EditProfileViewController.swift */,
 				7770B09F2C86B65600C4B900 /* LaunchScreen.storyboard */,
 				7770B0A22C86B65600C4B900 /* Info.plist */,
@@ -163,13 +193,6 @@
 				5B42E3812C9405EF008AEB42 /* Assets.xcassets */,
 			);
 			path = "Cooking-Instruction-App";
-			sourceTree = "<group>";
-		};
-		77FA21842C95D50E00C25BB1 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,6 +218,8 @@
 				772666562C91D174004C22BB /* FirebaseFirestore */,
 				771AD0952C9E8D370032034C /* GoogleSignIn */,
 				771AD0972C9E8D370032034C /* GoogleSignInSwift */,
+				5BB0B4A12C9EA90C00483264 /* SDWebImageSwiftUI */,
+				5B9248262C9EACF000C1A317 /* Alamofire */,
 			);
 			productName = "Cooking-Instruction-App";
 			productReference = 7770B0912C86B65400C4B900 /* Cooking-Instruction-App.app */;
@@ -227,6 +252,8 @@
 			packageReferences = (
 				7726664F2C91CFA1004C22BB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				771AD0942C9E8D370032034C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				5BB0B4A02C9EA90C00483264 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				5B9248252C9EACF000C1A317 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 7770B0922C86B65400C4B900 /* Products */;
 			projectDirPath = "";
@@ -242,9 +269,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BB0B4A32C9EABF300483264 /* GoogleService-Info.plist in Resources */,
 				7770B0A12C86B65600C4B900 /* Base in Resources */,
 				5B42E3822C9405EF008AEB42 /* Assets.xcassets in Resources */,
-				771AD09C2C9E8F1C0032034C /* GoogleService-Info.plist in Resources */,
 				7770B09C2C86B65400C4B900 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,9 +283,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BE859D22C9EBAFB00CDA9CA /* RecipeCardCell.swift in Sources */,
+				5B92482B2C9EB75F00C1A317 /* HomeViewModel.swift in Sources */,
 				7726664A2C91CB8C004C22BB /* LoginViewController.swift in Sources */,
 				7726665D2C91E34A004C22BB /* IconAppViewController.swift in Sources */,
 				7770B0992C86B65400C4B900 /* ViewController.swift in Sources */,
+				5BE09CB52C9F58C100533990 /* RecipeDetailViewModel.swift in Sources */,
+				5BD8F6072C9FF0CE008F7ACA /* FavouriteRecipesManager.swift in Sources */,
 				77FA21832C95D4AC00C25BB1 /* Store.swift in Sources */,
 				7726665F2C9200F9004C22BB /* HomeViewController.swift in Sources */,
 				771AD0842C9E89CC0032034C /* UserModel.swift in Sources */,
@@ -266,13 +297,18 @@
 				771AD08D2C9E8A6E0032034C /* IconAppViewModel.swift in Sources */,
 				771AD08A2C9E8A1A0032034C /* SignUpViewModel.swift in Sources */,
 				77D4352A2C9568EB0025F226 /* MapViewController.swift in Sources */,
+				5B9248292C9EB73D00C1A317 /* RecipeDetailViewController.swift in Sources */,
 				772666592C91D847004C22BB /* EditProfileViewController.swift in Sources */,
+				5BE859D62C9ECF2200CDA9CA /* Category.swift in Sources */,
 				77D435332C9572F20025F226 /* MapViewModel.swift in Sources */,
 				7770B0952C86B65400C4B900 /* AppDelegate.swift in Sources */,
 				7770B0972C86B65400C4B900 /* SceneDelegate.swift in Sources */,
 				771AD0902C9E8AD40032034C /* AuthService.swift in Sources */,
 				7726664C2C91CC6D004C22BB /* SignUpViewController.swift in Sources */,
+				5B3987352CA044E5009C73F3 /* AddRecipeViewController.swift in Sources */,
 				77D435372C95746B0025F226 /* CustomAnnotation.swift in Sources */,
+				5B92482D2C9EB78C00C1A317 /* Recipe.swift in Sources */,
+				5BE859D42C9EC88800CDA9CA /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +533,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		5B9248252C9EACF000C1A317 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		5BB0B4A02C9EA90C00483264 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.2;
+			};
+		};
 		771AD0942C9E8D370032034C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
@@ -516,6 +568,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5B9248262C9EACF000C1A317 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5B9248252C9EACF000C1A317 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		5BB0B4A12C9EA90C00483264 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5BB0B4A02C9EA90C00483264 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		771AD0952C9E8D370032034C /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 771AD0942C9E8D370032034C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
