@@ -1,35 +1,27 @@
-//
-//  IconAppViewController.swift
-//  Cooking-Instruction-App
-//
-//  Created by Hein Thant on 11/9/2567 BE.
-//
-
 import UIKit
+import GoogleSignIn
 
 class IconAppViewController: UIViewController {
     
     // IBOutlet connections for buttons
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var googleSignInButton: UIButton! // IBOutlet for Google Sign-In button
     
     // IBOutlet connections for images and labels
     @IBOutlet weak var firstImageView: UIImageView!
     @IBOutlet weak var secondImageView: UIImageView!
     @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
-    
+    @IBOutlet weak var googleSignInButton: UIButton!
     private var authService = AuthService.shared  // Accessing the singleton
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Set the corner radius for buttons
         loginButton.layer.cornerRadius = 10
-        signUpButton.layer.cornerRadius = 10
-        googleSignInButton.layer.cornerRadius = 10 // Set corner radius for Google Sign-In button
-        
+        signUpButton.layer.cornerRadius = 10// Set corner radius for Google Sign-In button
+        googleSignInButton.layer.cornerRadius = 10 
         // Enable clipping to bounds to ensure the corners are rounded
         loginButton.clipsToBounds = true
         signUpButton.clipsToBounds = true
@@ -38,6 +30,7 @@ class IconAppViewController: UIViewController {
         // Set images for UIImageViews
         firstImageView.image = UIImage(named: "Cooking-Craft")
         secondImageView.image = UIImage(named: "Cooking-Craft-withlogo")
+        googleSignInButton.isHidden = false
     }
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {
@@ -59,30 +52,31 @@ class IconAppViewController: UIViewController {
     }
     
     @IBAction func googleSignInTapped(_ sender: UIButton) {
-        AuthService.shared.signInWithGoogle(presenting: self) { result in
-            DispatchQueue.main.async { // Ensure UI updates are on the main thread
-                switch result {
-                case .success(let email):
-                    print("User signed in: \(email)")
-                    self.navigateToTabBarController()
-                case .failure(let error):
-                    // Check for specific error cases
-                    if error.localizedDescription == "User canceled the sign-in flow." {
-                        print("Google sign-in was canceled.")
-                    } else {
-                        print("Error signing in: \(error.localizedDescription)")
+            AuthService.shared.signInWithGoogle(presenting: self) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let email):
+                        print("User signed in: \(email)")
+                        self.navigateToTabBarController()
+                    case .failure(let error):
+                        // Only show an error for non-cancellation issues
+                        if !(error.localizedDescription.contains("User canceled the sign-in flow.")) {
+                        }
                     }
                 }
             }
         }
-    }
-
 
     
     private func navigateToTabBarController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let tabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as? UITabBarController {
-            self.navigationController?.setViewControllers([tabBarController], animated: true)
+            // Set the root view controller instead of using navigationController
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                sceneDelegate.window?.rootViewController = tabBarController
+                sceneDelegate.window?.makeKeyAndVisible()
+            }
         }
     }
+    
 }

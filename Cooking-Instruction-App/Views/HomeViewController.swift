@@ -133,4 +133,30 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             navigationController?.pushViewController(addRecipeVC, animated: true)
         }
     }
+    
+    @IBAction func signOutButtonTapped(_ sender: UIButton) {
+        viewModel.signOut { [weak self] result in
+            switch result {
+            case .success:
+                // Navigate to IconAppViewController after successful sign-out
+                self?.navigateToIconAppViewController()
+            case .failure(let error):
+                // Handle the error
+                self?.showError(error.localizedDescription)
+            }
+        }
+    }
+    private func navigateToIconAppViewController() {
+        // Assuming the sign-in screen is the root view controller
+        guard let window = UIApplication.shared.windows.first else { return }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let signInVC = storyboard.instantiateViewController(withIdentifier: "IconAppViewController")
+        window.rootViewController = signInVC
+        window.makeKeyAndVisible()
+    }
+    func showError(_ message: String) {
+           let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+           self.present(alert, animated: true, completion: nil)
+       }
 }

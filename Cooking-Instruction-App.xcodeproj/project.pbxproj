@@ -36,6 +36,8 @@
 		772666592C91D847004C22BB /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 772666582C91D847004C22BB /* EditProfileViewController.swift */; };
 		7726665D2C91E34A004C22BB /* IconAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726665C2C91E34A004C22BB /* IconAppViewController.swift */; };
 		7726665F2C9200F9004C22BB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7726665E2C9200F9004C22BB /* HomeViewController.swift */; };
+		774EF6322CA128310075D69E /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 774EF6312CA128310075D69E /* SDWebImage */; };
+		774EF6342CA128310075D69E /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 774EF6332CA128310075D69E /* SDWebImageMapKit */; };
 		7770B0952C86B65400C4B900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770B0942C86B65400C4B900 /* AppDelegate.swift */; };
 		7770B0972C86B65400C4B900 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770B0962C86B65400C4B900 /* SceneDelegate.swift */; };
 		7770B0992C86B65400C4B900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7770B0982C86B65400C4B900 /* ViewController.swift */; };
@@ -93,6 +95,8 @@
 				5BB0B4A22C9EA90C00483264 /* SDWebImageSwiftUI in Frameworks */,
 				772666572C91D174004C22BB /* FirebaseFirestore in Frameworks */,
 				771AD0982C9E8D370032034C /* GoogleSignInSwift in Frameworks */,
+				774EF6342CA128310075D69E /* SDWebImageMapKit in Frameworks */,
+				774EF6322CA128310075D69E /* SDWebImage in Frameworks */,
 				772666512C91CFA1004C22BB /* FirebaseAuth in Frameworks */,
 				772666532C91CFA1004C22BB /* FirebaseAuthCombine-Community in Frameworks */,
 			);
@@ -220,6 +224,8 @@
 				771AD0972C9E8D370032034C /* GoogleSignInSwift */,
 				5BB0B4A12C9EA90C00483264 /* SDWebImageSwiftUI */,
 				5B9248262C9EACF000C1A317 /* Alamofire */,
+				774EF6312CA128310075D69E /* SDWebImage */,
+				774EF6332CA128310075D69E /* SDWebImageMapKit */,
 			);
 			productName = "Cooking-Instruction-App";
 			productReference = 7770B0912C86B65400C4B900 /* Cooking-Instruction-App.app */;
@@ -254,6 +260,7 @@
 				771AD0942C9E8D370032034C /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				5BB0B4A02C9EA90C00483264 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				5B9248252C9EACF000C1A317 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				774EF6302CA128310075D69E /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 7770B0922C86B65400C4B900 /* Products */;
 			projectDirPath = "";
@@ -565,6 +572,14 @@
 				minimumVersion = 11.2.0;
 			};
 		};
+		774EF6302CA128310075D69E /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.7;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -607,6 +622,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7726664F2C91CFA1004C22BB /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestore;
+		};
+		774EF6312CA128310075D69E /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 774EF6302CA128310075D69E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		774EF6332CA128310075D69E /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 774EF6302CA128310075D69E /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -1,10 +1,3 @@
-//
-//  HomeViewModel.swift
-//  Cooking-Instruction-App
-//
-//  Created by Thaw Htut Soe on 9/21/24.
-//
-
 import Foundation
 import Alamofire
 
@@ -28,7 +21,7 @@ class HomeViewModel {
         }
     }
     
-    private let apiKey = "ca11b4f219254477b899c25d794a3cf3"
+    private let apiKey = "b54243df5dd64b8bbda2eeb0cb8ae48a"
     private let baseUrl = "https://api.spoonacular.com/recipes/complexSearch"
     
     // MARK: - Fetch Recipes from API
@@ -78,4 +71,14 @@ class HomeViewModel {
         // Fetch recipes again but this time filtered by the category
         fetchRecipes(query: "", category: category)
     }
+    func signOut(completion: @escaping (Result<Void, Error>) -> Void) {
+            AuthService.shared.signOut { result in
+                switch result {
+                case .success:
+                    completion(.success(())) // Notify success
+                case .failure(let error):
+                    completion(.failure(error)) // Notify failure with error
+                }
+            }
+        }
 }

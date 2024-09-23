@@ -1,68 +1,42 @@
-//
-//  SceneDelegate.swift
-//  Cooking-Instruction-App
-//
-//  Created by Hein Thant on 3/9/2567 BE.
-//
-
 import UIKit
-import FirebaseCore
 import FirebaseAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let windowScene = scene as? UIWindowScene else { return }
-              window = UIWindow(windowScene: windowScene)
 
-              // Check if the user is signed in
-              if Auth.auth().currentUser != nil {
-                  let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                  let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
-                  window?.rootViewController = mainTabBarController
-              } else {
-                  let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                  let iconAppViewController = storyboard.instantiateViewController(withIdentifier: "IconAppViewController") as! IconAppViewController
-                  window?.rootViewController = UINavigationController(rootViewController: iconAppViewController)
-              }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
 
-              window?.makeKeyAndVisible()
+        // Create a new UIWindow using the windowScene
+        window = UIWindow(windowScene: windowScene)
+
+        // Check if the user is logged in
+        if Auth.auth().currentUser != nil {
+            // User is logged in, set the root view controller to MainTabBarController
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let mainTabBarController = storyboard.instantiateViewController(withIdentifier: "MainTabBarController")
+            window?.rootViewController = mainTabBarController
+        } else {
+            // User is not logged in, set the root view controller to IconAppViewController (login/initial screen)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let iconAppViewController = storyboard.instantiateViewController(withIdentifier: "IconAppViewController")
+            window?.rootViewController = iconAppViewController
+        }
+
+        // Make the window visible
+        window?.makeKeyAndVisible()
     }
 
-    func sceneDidDisconnect(_ scene: UIScene) {
-        // Called as the scene is being released by the system.
-        // This occurs shortly after the scene enters the background, or when its session is discarded.
-        // Release any resources associated with this scene that can be re-created the next time the scene connects.
-        // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+    // Handle the user logging out by resetting the root view controller
+    func resetToLoginScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let iconAppViewController = storyboard.instantiateViewController(withIdentifier: "IconAppViewController")
+        
+        // Set the root view controller to the login screen and animate the transition
+        window?.rootViewController = iconAppViewController
     }
 
-    func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
-    }
-
-    func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
-    }
-
-    func sceneWillEnterForeground(_ scene: UIScene) {
-        // Called as the scene transitions from the background to the foreground.
-        // Use this method to undo the changes made on entering the background.
-    }
-
-    func sceneDidEnterBackground(_ scene: UIScene) {
-        // Called as the scene transitions from the foreground to the background.
-        // Use this method to save data, release shared resources, and store enough scene-specific state information
-        // to restore the scene back to its current state.
-    }
-
-
+    // Other lifecycle methods as needed
 }
-
