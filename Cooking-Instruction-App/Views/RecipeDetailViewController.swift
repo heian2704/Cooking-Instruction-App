@@ -147,7 +147,11 @@ class RecipeDetailViewController: UIViewController {
 
         elapsedTime += 1
         let progress = Float(elapsedTime) / Float(totalCookingTime)
-        progressView.setProgress(progress, animated: true)
+        
+        // Smooth animation for progress view
+          UIView.animate(withDuration: 1.0) {
+              self.progressView.setProgress(progress, animated: true)
+          }
 
         // **Update button title with remaining time in minutes**
         let remainingTime = totalCookingTime - elapsedTime
@@ -160,11 +164,10 @@ class RecipeDetailViewController: UIViewController {
             if !hasShownNotification {
                 hasShownNotification = true
                 
-                // Change the button's background color to green
-                startTimerButton.backgroundColor = UIColor.green
-                
-                // Change the progress view's tint color to green
-                progressView.tintColor = UIColor.green
+                UIView.animate(withDuration: 1.0) {
+                          self.startTimerButton.backgroundColor = UIColor.green
+                          self.progressView.tintColor = UIColor.green
+                      }
                 
                 let alert = UIAlertController(title: "Cooking Complete", message: "Your dish is ready!", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
@@ -174,7 +177,8 @@ class RecipeDetailViewController: UIViewController {
                 present(alert, animated: true, completion: nil)
                 sendLocalNotification()
             }
-        }
+        animateButtonPulsing()
+    }
 
 
     // Local notification setup for completion
@@ -213,5 +217,16 @@ class RecipeDetailViewController: UIViewController {
         let alert = UIAlertController(title: "Recipe Details", message: details, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func animateButtonPulsing() {
+        let pulseAnimation = CABasicAnimation(keyPath: "transform.scale")
+        pulseAnimation.duration = 0.8
+        pulseAnimation.fromValue = 1.0
+        pulseAnimation.toValue = 1.1
+        pulseAnimation.autoreverses = true
+        pulseAnimation.repeatCount = .infinity
+
+        startTimerButton.layer.add(pulseAnimation, forKey: "pulsing")
     }
 }
