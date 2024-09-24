@@ -4,9 +4,10 @@ import FirebaseAuth
 class SignUpViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
-    
+    @IBOutlet weak var emailbtn: UIButton!
+    @IBOutlet weak var passwordbtn: UIButton!
+
     private var viewModel = SignUpViewModel()
     
     override func viewDidLoad() {
@@ -17,12 +18,18 @@ class SignUpViewController: UIViewController {
     private func setupUI() {
         emailTextField.layer.cornerRadius = 10
         passwordTextField.layer.cornerRadius = 10
-        confirmPasswordTextField.layer.cornerRadius = 10
         signUpButton.layer.cornerRadius = 10
+        signUpButton.isHidden = false
+        signUpButton.alpha = 1.0
         emailTextField.clipsToBounds = true
         passwordTextField.clipsToBounds = true
-        confirmPasswordTextField.clipsToBounds = true
         signUpButton.clipsToBounds = true
+        let envelopeImage = UIImage(systemName: "envelope")
+        emailbtn.setImage(envelopeImage, for: .normal)
+        emailbtn.tintColor = UIColor.systemBlue
+        let lockImage = UIImage(systemName: "lock")
+        passwordbtn.setImage(lockImage, for: .normal)
+        passwordbtn.tintColor = UIColor.systemBlue
     }
     
     @IBAction func signUpClick(_ sender: Any) {

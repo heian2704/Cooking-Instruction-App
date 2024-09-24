@@ -39,9 +39,14 @@ class RecipeDetailViewController: UIViewController {
         }
 
         // Configure progress view
-        progressView.tintColor = UIColor.blue // Consumed time color
+        progressView.tintColor = UIColor.yellow // Consumed time color
         progressView.trackTintColor = UIColor.lightGray // Remaining time color
         progressView.progress = 0.0 // Start with an empty progress view
+    
+        imageView.layer.cornerRadius = 20
+        
+        startTimerButton.layer.cornerRadius = 20
+        imageView.layer.masksToBounds = true
     }
 
     // MARK: - Fetch Recipe Details

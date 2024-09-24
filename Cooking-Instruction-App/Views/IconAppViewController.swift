@@ -8,9 +8,7 @@ class IconAppViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     
     // IBOutlet connections for images and labels
-    @IBOutlet weak var firstImageView: UIImageView!
     @IBOutlet weak var secondImageView: UIImageView!
-    @IBOutlet weak var firstLabel: UILabel!
     @IBOutlet weak var secondLabel: UILabel!
     @IBOutlet weak var googleSignInButton: UIButton!
     private var authService = AuthService.shared  // Accessing the singleton
@@ -27,10 +25,11 @@ class IconAppViewController: UIViewController {
         signUpButton.clipsToBounds = true
         googleSignInButton.clipsToBounds = true
         
-        // Set images for UIImageViews
-        firstImageView.image = UIImage(named: "Cooking-Craft")
+        // Set images for UIImageView
         secondImageView.image = UIImage(named: "Cooking-Craft-withlogo")
         googleSignInButton.isHidden = false
+        googleSignInButton.tintColor = .blue
+        googleSignInButton.setImage(UIImage(named: "google"), for: .normal)
     }
     
     @IBAction func loginButtonTapped(_ sender: UIButton) {

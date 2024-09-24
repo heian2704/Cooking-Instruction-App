@@ -5,7 +5,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
-    
+    @IBOutlet weak var emailbtn: UIButton!
+    @IBOutlet weak var passwordbtn: UIButton!
     private var viewModel = LoginViewModel()
     
     override func viewDidLoad() {
@@ -20,6 +21,12 @@ class LoginViewController: UIViewController {
         emailTextField.clipsToBounds = true
         passwordTextField.clipsToBounds = true
         loginButton.clipsToBounds = true
+        let envelopeImage = UIImage(systemName: "envelope")
+        emailbtn.setImage(envelopeImage, for: .normal)
+        emailbtn.tintColor = UIColor.systemBlue
+        let lockImage = UIImage(systemName: "lock")
+        passwordbtn.setImage(lockImage, for: .normal)
+        passwordbtn.tintColor = UIColor.systemBlue
     }
     
     @IBAction func loginClick(_ sender: Any) {
@@ -31,7 +38,7 @@ class LoginViewController: UIViewController {
             case .success:
                 self.navigateToTabBarController()
             case .failure(let error):
-                self.showAlert(message: error.localizedDescription)
+                self.showAlert(message: "Email or password does not match. Please try again.")
             }
         }
     }

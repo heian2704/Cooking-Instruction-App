@@ -142,6 +142,7 @@
 				5BE859D12C9EBAFB00CDA9CA /* RecipeCardCell.swift */,
 				5BE859D32C9EC88800CDA9CA /* CategoryCell.swift */,
 				5B3987342CA044E5009C73F3 /* AddRecipeViewController.swift */,
+				772666582C91D847004C22BB /* EditProfileViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -190,7 +191,6 @@
 				7770B0962C86B65400C4B900 /* SceneDelegate.swift */,
 				7770B0982C86B65400C4B900 /* ViewController.swift */,
 				7770B09A2C86B65400C4B900 /* Main.storyboard */,
-				772666582C91D847004C22BB /* EditProfileViewController.swift */,
 				7770B09F2C86B65600C4B900 /* LaunchScreen.storyboard */,
 				7770B0A22C86B65600C4B900 /* Info.plist */,
 				771AD09B2C9E8F1C0032034C /* GoogleService-Info.plist */,

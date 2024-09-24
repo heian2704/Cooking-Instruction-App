@@ -1,10 +1,3 @@
-//
-//  EditProfileViewController.swift
-//  Cooking-Instruction-App
-//
-//  Created by Hein Thant on 11/9/2567 BE.
-//
-
 import UIKit
 import FirebaseAuth
 
@@ -78,3 +71,4 @@ class EditProfileViewController: UIViewController {
         }
     }
 }
+
