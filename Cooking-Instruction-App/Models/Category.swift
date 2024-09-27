@@ -9,4 +9,5 @@ import Foundation
 
 struct RecipeCategory {
     let name: String
+    
 }

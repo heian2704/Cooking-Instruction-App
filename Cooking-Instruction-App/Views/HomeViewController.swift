@@ -6,9 +6,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
 
     @IBOutlet weak var collectionView: UICollectionView!  // For recipes
     @IBOutlet weak var categoriesCollectionView: UICollectionView!  // For categories
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var signOutButton: UIButton!
-    
+    var selectedCategoryIndexPath: IndexPath?
     let viewModel = HomeViewModel()
     private var searchWorkItem: DispatchWorkItem?
     
@@ -27,7 +26,6 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         setupCollectionView()
         bindViewModel()
         
-        searchBar.delegate = self
         
         // Fetch initial data (all recipes)
         viewModel.fetchCategories()
@@ -94,7 +92,8 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
                 return UICollectionViewCell()
             }
             let category = viewModel.categories[indexPath.row]
-            cell.configure(with: category)
+            let isSelected = (indexPath == selectedCategoryIndexPath)  // Check if this cell is selected
+            cell.configure(with: category, isSelected: isSelected)      // Pass the actual boolean value
             return cell
         } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCardCell", for: indexPath) as? RecipeCardCell else {
@@ -113,10 +112,18 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoriesCollectionView {
+            // Update the selected indexPath
+            selectedCategoryIndexPath = indexPath
+            
+            // Reload the collection view to update the selection
+            collectionView.reloadData()
+            
+            // Fetch recipes for the selected category
             let category = viewModel.categories[indexPath.row]
             viewModel.filterRecipes(by: category.name)
         }
     }
+
     
     // MARK: - Navigation
     

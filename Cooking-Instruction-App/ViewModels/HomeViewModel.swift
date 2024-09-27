@@ -20,39 +20,58 @@ class HomeViewModel {
             onCategoriesFetched?()
         }
     }
-    
-    private let apiKey = "ca11b4f219254477b899c25d794a3cf3"
+    //demo-key=89f9b9589ba048e89ba87fc0a2326096
+    //ca11b4f219254477b899c25d794a3cf3
+    private let apiKey = "89f9b9589ba048e89ba87fc0a2326096"
     private let baseUrl = "https://api.spoonacular.com/recipes/complexSearch"
     
+    // To avoid unnecessary repeated API calls
+    private var hasFetchedAllRecipes: Bool = false
+    
     // MARK: - Fetch Recipes from API
-    func fetchRecipes(query: String = "", category: String = "", maxReadyTime: Int? = nil) {
+    func fetchRecipes(query: String = "", category: String = "", maxReadyTime: Int? = nil, forceRefresh: Bool = false) {
+        // If already fetched all recipes and no force refresh, avoid calling the API again
+        if hasFetchedAllRecipes && query.isEmpty && category.isEmpty && !forceRefresh {
+            self.filteredRecipes = self.recipes
+            onRecipesFetched?()
+            return
+        }
+
         var parameters: [String: Any] = [
             "apiKey": apiKey,
             "fillIngredients": true,
             "addRecipeInformation": true,
-            "addRecipeInstructions": true
+            "addRecipeInstructions": true,
+            "number": 30  // Fetch 30 recipes instead of the default 10
         ]
         
-        // Add the query if provided, otherwise fetch all recipes
+        // Add query if provided
         if !query.isEmpty {
             parameters["query"] = query
         }
         
-        // Add maxReadyTime if it's provided
-        if let maxTime = maxReadyTime {
-            parameters["maxReadyTime"] = maxTime
-        }
-        
-        // Add category filtering if a category is provided and it's not "All"
+        // Add category filtering if provided and not "All"
         if !category.isEmpty && category != "All" {
             parameters["type"] = category.lowercased()
         }
-        
+
+        // Add maxReadyTime if provided
+        if let maxTime = maxReadyTime {
+            parameters["maxReadyTime"] = maxTime
+        }
+
         // Fetch from API
         AF.request(baseUrl, method: .get, parameters: parameters).responseDecodable(of: RecipeResponse.self) { response in
             switch response.result {
             case .success(let recipeResponse):
-                self.recipes = recipeResponse.results
+                // Store and cache recipes
+                if query.isEmpty && category.isEmpty {
+                    self.recipes = recipeResponse.results
+                    self.hasFetchedAllRecipes = true // Cache the result to avoid refetch
+                }
+                // Update filtered recipes
+                self.filteredRecipes = recipeResponse.results
+                self.onRecipesFetched?() // Notify the view to reload
             case .failure(let error):
                 print("Failed to fetch recipes: \(error)")
             }

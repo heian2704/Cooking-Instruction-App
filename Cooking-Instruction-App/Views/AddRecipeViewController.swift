@@ -17,6 +17,8 @@ class AddRecipeViewController: UIViewController {
     @IBOutlet weak var timeRequiredTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
 
+    private var selectedImagePath: String?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Add New Recipe"
@@ -36,14 +38,14 @@ class AddRecipeViewController: UIViewController {
             let ingredients = ingredientsTextView.text ?? ""
             let cookingTime = Int(timeRequiredTextField.text ?? "0") ?? 0
 
-            // Use a placeholder image URL for now
-            let imageUrl = "https://via.placeholder.com/150"
+            // Use the selected image path, or use a placeholder image if not selected
+            let imageUrl = selectedImagePath ?? "https://via.placeholder.com/150"
 
             // Create a new Recipe object
             let newRecipe = Recipe(
                 id: Int.random(in: 1000...9999),
                 title: title,
-                image: imageUrl,
+                image: imageUrl, // This is now the local file path of the selected image
                 cookingTime: cookingTime,
                 rating: nil,
                 ingredients: ingredients.split(separator: ",").map { Ingredient(name: String($0)) },
@@ -83,6 +85,26 @@ class AddRecipeViewController: UIViewController {
         present(imagePicker, animated: true)
     }
 
+    // MARK: - Save Image to Documents Directory
+    private func saveImageToDocumentsDirectory(image: UIImage) -> String? {
+        if let data = image.jpegData(compressionQuality: 0.8) {
+            let fileManager = FileManager.default
+            let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+            if let documentsDirectory = urls.first {
+                let fileName = UUID().uuidString + ".jpg"
+                let fileURL = documentsDirectory.appendingPathComponent(fileName)
+                
+                do {
+                    try data.write(to: fileURL)
+                    return fileURL.path
+                } catch {
+                    print("Error saving image: \(error)")
+                }
+            }
+        }
+        return nil
+    }
+
     // MARK: - Show Error Alert
     private func showAlert(_ message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
@@ -96,6 +118,11 @@ extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigation
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
             recipeImageView.image = selectedImage
+            
+            // Save the image to the app's documents directory
+            if let imagePath = saveImageToDocumentsDirectory(image: selectedImage) {
+                self.selectedImagePath = imagePath
+            }
         }
         dismiss(animated: true, completion: nil)
     }

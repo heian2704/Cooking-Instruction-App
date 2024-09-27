@@ -1,5 +1,4 @@
 import UIKit
-import SDWebImage
 
 class OwnRecipeTableCell: UITableViewCell {
 
@@ -8,8 +7,11 @@ class OwnRecipeTableCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var cookingTimeLabel: UILabel!
     @IBOutlet weak var ingredientsLabel: UILabel!
+    @IBOutlet weak var deleteButton: UIButton! // Add this outlet
 
     // MARK: - Cell Configuration Method
+    var onDeleteButtonTapped: (() -> Void)? // Callback for delete action
+
     func configure(with recipe: Recipe) {
         // Set recipe title
         titleLabel.text = recipe.title
@@ -28,26 +30,32 @@ class OwnRecipeTableCell: UITableViewCell {
         } else {
             ingredientsLabel.text = "Ingredients: N/A"
         }
-
-        // Load the image asynchronously with SDWebImage
-        if let imageUrl = URL(string: recipe.image) {
-            recipeImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"), options: [.progressiveLoad, .scaleDownLargeImages]) { [weak self] (image, error, cacheType, imageURL) in
-                guard let strongSelf = self else { return }
-
-                // Apply workaround to decode any potential buggy PNG images
-                if let img = image {
-                    let decodedImage = UIImage.sd_decodedImage(with: img)
-                    strongSelf.recipeImageView.image = decodedImage
-                } else {
-                    strongSelf.recipeImageView.image = UIImage(named: "placeholder")
-                }
-            }
-        } else {
-            recipeImageView.image = UIImage(named: "placeholder")
-        }
+        // Load the image - check if it's a local file path
+        if recipe.image!.starts(with: "/") {
+                  // Load from local directory
+            if let image = UIImage(contentsOfFile: recipe.image!) {
+                      recipeImageView.image = image
+                  } else {
+                      recipeImageView.image = UIImage(named: "placeholder")
+                  }
+              } else {
+                  // Load from URL (SDWebImage)
+                  if let imageUrl = URL(string: recipe.image!) {
+                      recipeImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))
+                  } else {
+                      recipeImageView.image = UIImage(named: "placeholder")
+                  }
+              }
 
         // Style the image view
         recipeImageView.layer.cornerRadius = 10
         recipeImageView.layer.masksToBounds = true
+
+        // Attach action to delete button
+        deleteButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+    }
+
+    @objc private func deleteButtonTapped() {
+        onDeleteButtonTapped?() // Trigger the callback for delete
     }
 }

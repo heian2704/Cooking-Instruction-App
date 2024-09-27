@@ -14,7 +14,7 @@ class FavouriteRecipeCell: UITableViewCell {
         titleLabel.text = recipe.title
 
         // Load image asynchronously using SDWebImage
-        if let imageUrl = URL(string: recipe.image) {
+        if let imageUrl = URL(string: recipe.image!) {
             recipeImageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))
         } else {
             recipeImageView.image = UIImage(named: "placeholder")

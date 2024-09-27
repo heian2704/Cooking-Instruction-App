@@ -5,6 +5,7 @@ import UserNotifications
 class RecipeDetailViewController: UIViewController {
 
     var recipe: Recipe?  // The property to hold the selected recipe
+    var isLocalRecipe: Bool = false  // Flag to indicate if the recipe is local
     private var hasShownNotification = false // Flag to prevent multiple notifications
 
     // MARK: - Outlets
@@ -20,7 +21,7 @@ class RecipeDetailViewController: UIViewController {
 
     // Timer properties
     var timer: Timer?
-    var totalCookingTime: Int = 0 // Total cooking time in seconds
+    var totalCookingTime: Int = 10 // Total cooking time in seconds
     var elapsedTime: Int = 0
 
     override func viewDidLoad() {
@@ -33,9 +34,11 @@ class RecipeDetailViewController: UIViewController {
             }
         }
 
-        // Fetch recipe details and cooking time from API
-        if let recipe = recipe {
-            fetchRecipeDetails(recipeId: recipe.id)
+        // If the recipe is local, don't fetch details from the API
+        if isLocalRecipe {
+            setupLocalRecipeDetails()  // Directly set the recipe details if it is a local recipe
+        } else if let recipe = recipe {
+            fetchRecipeDetails(recipeId: recipe.id)  // Fetch from the API for non-local recipes
         }
 
         // Configure progress view
@@ -44,12 +47,11 @@ class RecipeDetailViewController: UIViewController {
         progressView.progress = 0.0 // Start with an empty progress view
     
         imageView.layer.cornerRadius = 20
-        
         startTimerButton.layer.cornerRadius = 20
         imageView.layer.masksToBounds = true
     }
 
-    // MARK: - Fetch Recipe Details
+    // MARK: - Fetch Recipe Details (API-based recipes)
     private func fetchRecipeDetails(recipeId: Int) {
         let viewModel = RecipeDetailViewModel()
         viewModel.fetchRecipeDetails(by: recipeId) { [weak self] detailedRecipe in
@@ -63,13 +65,23 @@ class RecipeDetailViewController: UIViewController {
     }
 
     // MARK: - Setup Methods
+    // This method will handle displaying details for API-based recipes
     private func setupRecipeDetails() {
         guard let recipe = recipe else { return }
 
-        // Set title and image
+        // Set title
         titleLabel.text = recipe.title
-        if let imageUrl = URL(string: recipe.image) {
-            imageView.sd_setImage(with: imageUrl, placeholderImage: UIImage(named: "placeholder"))
+
+        // Handle local image or load from web URL
+        if let localImagePath = recipe.imagePath, FileManager.default.fileExists(atPath: localImagePath) {
+            // Load local image from path
+            imageView.image = UIImage(contentsOfFile: localImagePath)
+        } else if let imageUrl = recipe.image, let url = URL(string: imageUrl) {
+            // Load image from web URL
+            imageView.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"))
+        } else {
+            // Default placeholder
+            imageView.image = UIImage(named: "placeholder")
         }
 
         // Set ingredients
@@ -79,24 +91,63 @@ class RecipeDetailViewController: UIViewController {
             ingredientsLabel.text = "No ingredients available"
         }
 
-        // **Get cooking time from API** and display based on its value
-        let cookingTimeInMinutes = recipe.cookingTime ?? 1
-        totalCookingTime = 30 // Set timer to (30 seconds) for testing
-
-        if cookingTimeInMinutes >= 60 {
-            let cookingTimeInHours = cookingTimeInMinutes / 60
-            cookingTimeLabel.text = "\(cookingTimeInHours) hr"
-            startTimerButton.setTitle("\(cookingTimeInHours) hr", for: .normal) // Show 1 hour if time is 1 hour or more
+        // Set cooking time
+        if let cookingTime = recipe.cookingTime {
+            cookingTimeLabel.text = "\(cookingTime) min"
         } else {
-            cookingTimeLabel.text = "\(cookingTimeInMinutes) min"
-            startTimerButton.setTitle("\(cookingTimeInMinutes) min", for: .normal) // Show minutes if time is less than 1 hour
+            cookingTimeLabel.text = "Cooking Time: N/A"
         }
 
-        // Display rating
-        ratingLabel.text = recipe.rating != nil ? "\(recipe.rating!)/5" : "N/A"
+        // Display rating if available
+        if let rating = recipe.rating {
+            ratingLabel.text = "Rating: \(rating)/5"
+        } else {
+            ratingLabel.text = "Rating: N/A"
+        }
 
-        // Update the favorite button appearance
+        // Update favorite button appearance
         updateFavoriteButton()
+    }
+
+    private func setupLocalRecipeDetails() {
+        guard let recipe = recipe else {
+            print("Recipe object is nil.")
+            return
+        }
+
+        // Set title and log it
+        titleLabel.text = recipe.title
+        print("Recipe title: \(recipe.title)")
+        
+        if let imagePath = recipe.image, FileManager.default.fileExists(atPath: imagePath) {
+            let localImage = UIImage(contentsOfFile: imagePath)
+            imageView.image = localImage ?? UIImage(named: "placeholder")
+        } else {
+            imageView.image = UIImage(named: "placeholder")
+        }
+
+        // Set ingredients and log them
+        if let ingredients = recipe.ingredients?.map({ $0.name }) {
+            ingredientsLabel.text = ingredients.joined(separator: ", ")
+            print("Ingredients: \(ingredients.joined(separator: ", "))")
+        } else {
+            ingredientsLabel.text = "No ingredients available"
+            print("No ingredients available")
+        }
+
+        // Set cooking time
+        if let cookingTime = recipe.cookingTime {
+            cookingTimeLabel.text = "\(cookingTime) min"
+        } else {
+            cookingTimeLabel.text = "Cooking Time: N/A"
+        }
+
+        // Set rating
+        if let rating = recipe.rating {
+            ratingLabel.text = "Rating: \(rating)/5"
+        } else {
+            ratingLabel.text = "Rating: N/A"
+        }
     }
 
     // MARK: - Favorite Button Actions
@@ -149,37 +200,35 @@ class RecipeDetailViewController: UIViewController {
         let progress = Float(elapsedTime) / Float(totalCookingTime)
         
         // Smooth animation for progress view
-          UIView.animate(withDuration: 1.0) {
+        UIView.animate(withDuration: 1.0) {
               self.progressView.setProgress(progress, animated: true)
           }
 
-        // **Update button title with remaining time in minutes**
+        // Update button title with remaining time in minutes
         let remainingTime = totalCookingTime - elapsedTime
         let remainingSeconds = remainingTime % 60
-        startTimerButton.setTitle("\(remainingSeconds)", for: .normal) // Update during testing to show remaining seconds
+        startTimerButton.setTitle("\(remainingSeconds)", for: .normal)
     }
 
-    // Automatically show in-app notification when the cooking timer completes
+    // Show completion notification when the cooking timer finishes
     private func showCompletionNotification() {
-            if !hasShownNotification {
-                hasShownNotification = true
+        if !hasShownNotification {
+            hasShownNotification = true
                 
-                UIView.animate(withDuration: 1.0) {
-                          self.startTimerButton.backgroundColor = UIColor.green
-                          self.progressView.tintColor = UIColor.green
-                      }
-                
-                let alert = UIAlertController(title: "Cooking Complete", message: "Your dish is ready!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                    // Dismiss the alert
-                    self.dismiss(animated: true, completion: nil)
-                }))
-                present(alert, animated: true, completion: nil)
-                sendLocalNotification()
+            UIView.animate(withDuration: 1.0) {
+                self.startTimerButton.backgroundColor = UIColor.green
+                self.progressView.tintColor = UIColor.green
             }
+                
+            let alert = UIAlertController(title: "Cooking Complete", message: "Your dish is ready!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                self.dismiss(animated: true, completion: nil)
+            }))
+            present(alert, animated: true, completion: nil)
+            sendLocalNotification()
+        }
         animateButtonPulsing()
     }
-
 
     // Local notification setup for completion
     private func sendLocalNotification() {
@@ -210,7 +259,7 @@ class RecipeDetailViewController: UIViewController {
             details += "Cooking Time: \(cookingTime) min\n\n" // Show cooking time in minutes
         }
         if let rating = recipe.rating {
-            details += "Rating: \(rating)/5"
+            details += "Rating: \(Int(rating))/5"
         }
 
         // Present details in an alert or a new view

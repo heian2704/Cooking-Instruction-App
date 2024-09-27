@@ -7,12 +7,13 @@ struct RecipeResponse: Codable {
 struct Recipe: Codable {
     let id: Int
     let title: String
-    let image: String
+    var image: String?  // Support both web URLs and optional images
+    var imagePath: String?  // Add a path for local images
     let cookingTime: Int?  // Example field: "readyInMinutes"
     let rating: Double?  // Example field: "spoonacularScore"
     let ingredients: [Ingredient]?  // Correct mapping for `extendedIngredients`
     let instructions: [Instruction]?  // Correct mapping for `analyzedInstructions`
-    
+
     enum CodingKeys: String, CodingKey {
         case id
         case title
