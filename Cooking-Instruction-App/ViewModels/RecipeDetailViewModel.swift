@@ -3,7 +3,7 @@ import Alamofire
 
 class RecipeDetailViewModel {
     
-    private let apiKey = "b54243df5dd64b8bbda2eeb0cb8ae48a" // Replace this with your Spoonacular API Key
+    private let apiKey = "ca11b4f219254477b899c25d794a3cf3" // Replace this with your Spoonacular API Key
     
     // Fetch recipe details (including ingredients and steps) by recipe ID
     func fetchRecipeDetails(by id: Int, completion: @escaping (Recipe?) -> Void) {

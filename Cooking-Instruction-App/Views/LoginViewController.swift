@@ -37,7 +37,7 @@ class LoginViewController: UIViewController {
             switch result {
             case .success:
                 self.navigateToTabBarController()
-            case .failure(let error):
+            case .failure(_):
                 self.showAlert(message: "Email or password does not match. Please try again.")
             }
         }

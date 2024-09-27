@@ -21,25 +21,29 @@ class HomeViewModel {
         }
     }
     
-    private let apiKey = "b54243df5dd64b8bbda2eeb0cb8ae48a"
+    private let apiKey = "ca11b4f219254477b899c25d794a3cf3"
     private let baseUrl = "https://api.spoonacular.com/recipes/complexSearch"
     
     // MARK: - Fetch Recipes from API
     func fetchRecipes(query: String = "", category: String = "", maxReadyTime: Int? = nil) {
         var parameters: [String: Any] = [
-            "query": query,
             "apiKey": apiKey,
             "fillIngredients": true,
             "addRecipeInformation": true,
             "addRecipeInstructions": true
         ]
         
+        // Add the query if provided, otherwise fetch all recipes
+        if !query.isEmpty {
+            parameters["query"] = query
+        }
+        
         // Add maxReadyTime if it's provided
         if let maxTime = maxReadyTime {
             parameters["maxReadyTime"] = maxTime
         }
         
-        // Add category filtering if a category is provided
+        // Add category filtering if a category is provided and it's not "All"
         if !category.isEmpty && category != "All" {
             parameters["type"] = category.lowercased()
         }
@@ -68,17 +72,24 @@ class HomeViewModel {
 
     // MARK: - Filter Recipes by Category
     func filterRecipes(by category: String) {
-        // Fetch recipes again but this time filtered by the category
-        fetchRecipes(query: "", category: category)
+        if category == "All" {
+            // Fetch all recipes (reset filtering)
+            fetchRecipes(query: "")
+        } else {
+            // Fetch recipes filtered by the selected category
+            fetchRecipes(query: "", category: category)
+        }
     }
+    
+    // MARK: - Sign Out
     func signOut(completion: @escaping (Result<Void, Error>) -> Void) {
-            AuthService.shared.signOut { result in
-                switch result {
-                case .success:
-                    completion(.success(())) // Notify success
-                case .failure(let error):
-                    completion(.failure(error)) // Notify failure with error
-                }
+        AuthService.shared.signOut { result in
+            switch result {
+            case .success:
+                completion(.success(())) // Notify success
+            case .failure(let error):
+                completion(.failure(error)) // Notify failure with error
             }
         }
+    }
 }

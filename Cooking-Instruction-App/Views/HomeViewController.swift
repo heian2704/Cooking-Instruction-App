@@ -15,11 +15,13 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Set the navigation title and the + button on the right
+        // Set the navigation title
         self.title = "Cook Craft"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewRecipe))
         navigationController?.navigationBar.tintColor = .black
         
+        // Remove add recipe button if not needed
+        // navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewRecipe))
+
         // Setup UI and bind to ViewModel
         setupCollectionViewLayout()
         setupCollectionView()
@@ -27,9 +29,9 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         searchBar.delegate = self
         
-        // Fetch initial data
+        // Fetch initial data (all recipes)
         viewModel.fetchCategories()
-        viewModel.fetchRecipes(query: "pasta")
+        viewModel.fetchRecipes(query: "")
     }
     
     // MARK: - Setup Methods
@@ -75,7 +77,7 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
         }
     }
-    
+
     // MARK: - UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -126,37 +128,30 @@ class HomeViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    // MARK: - Add New Recipe
-    @objc private func addNewRecipe() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let addRecipeVC = storyboard.instantiateViewController(withIdentifier: "AddRecipeViewController") as? AddRecipeViewController {
-            navigationController?.pushViewController(addRecipeVC, animated: true)
-        }
-    }
-    
+    // MARK: - Sign Out Logic
     @IBAction func signOutButtonTapped(_ sender: UIButton) {
         viewModel.signOut { [weak self] result in
             switch result {
             case .success:
-                // Navigate to IconAppViewController after successful sign-out
                 self?.navigateToIconAppViewController()
             case .failure(let error):
-                // Handle the error
                 self?.showError(error.localizedDescription)
             }
         }
     }
+    
     private func navigateToIconAppViewController() {
-        // Assuming the sign-in screen is the root view controller
         guard let window = UIApplication.shared.windows.first else { return }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let signInVC = storyboard.instantiateViewController(withIdentifier: "IconAppViewController")
         window.rootViewController = signInVC
         window.makeKeyAndVisible()
     }
+
+    // MARK: - Error Handling
     func showError(_ message: String) {
-           let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-           alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-           self.present(alert, animated: true, completion: nil)
-       }
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
 }

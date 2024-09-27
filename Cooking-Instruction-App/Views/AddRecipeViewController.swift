@@ -1,88 +1,101 @@
 import UIKit
 
+// MARK: - Delegate Protocol
+protocol AddRecipeDelegate: AnyObject {
+    func didAddRecipe(_ recipe: Recipe)
+}
+
 class AddRecipeViewController: UIViewController {
+
+    // MARK: - Delegate
+    weak var delegate: AddRecipeDelegate?
 
     // MARK: - Outlets
     @IBOutlet weak var recipeTitleTextField: UITextField!
     @IBOutlet weak var ingredientsTextView: UITextView!
-    @IBOutlet weak var stepsTextView: UITextView!
     @IBOutlet weak var recipeImageView: UIImageView!
+    @IBOutlet weak var timeRequiredTextField: UITextField!
     @IBOutlet weak var submitButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.title = "Add New Recipe"
         
-        // Add tap gesture to allow image selection
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectImageTapped))
+        // Set up tap gesture for selecting images
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(selectImageTapped))
         recipeImageView.isUserInteractionEnabled = true
-        recipeImageView.addGestureRecognizer(tapGestureRecognizer)
-
-        // Styling for the submit button (to ensure it's visible and styled well)
-        setupSubmitButton()
-    }
-
-    // MARK: - Setup Submit Button Styling
-    private func setupSubmitButton() {
-        submitButton.layer.cornerRadius = 10
-        submitButton.backgroundColor = .systemBlue
-        submitButton.setTitleColor(.white, for: .normal)
-        submitButton.setTitle("Submit Recipe", for: .normal)
-        
-        // Auto layout constraints to ensure it's visible
-        submitButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            submitButton.topAnchor.constraint(equalTo: stepsTextView.bottomAnchor, constant: 20),
-            submitButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            submitButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            submitButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
+        recipeImageView.addGestureRecognizer(tapGesture)
     }
 
     // MARK: - Actions
-
     @IBAction func submitRecipeTapped(_ sender: UIButton) {
-        guard let title = recipeTitleTextField.text, !title.isEmpty,
-              let ingredients = ingredientsTextView.text, !ingredients.isEmpty,
-              let steps = stepsTextView.text, !steps.isEmpty else {
-            showAlert(message: "Please fill in all the fields.")
-            return
+        // Ensure the fields are validated
+        if validateFields() {
+            // Collect the data entered by the user
+            let title = recipeTitleTextField.text ?? ""
+            let ingredients = ingredientsTextView.text ?? ""
+            let cookingTime = Int(timeRequiredTextField.text ?? "0") ?? 0
+
+            // Use a placeholder image URL for now
+            let imageUrl = "https://via.placeholder.com/150"
+
+            // Create a new Recipe object
+            let newRecipe = Recipe(
+                id: Int.random(in: 1000...9999),
+                title: title,
+                image: imageUrl,
+                cookingTime: cookingTime,
+                rating: nil,
+                ingredients: ingredients.split(separator: ",").map { Ingredient(name: String($0)) },
+                instructions: nil
+            )
+
+            // Notify the delegate (OwnRecipeViewController) that a new recipe has been added
+            delegate?.didAddRecipe(newRecipe)
+            
+            // Dismiss AddRecipeViewController and go back to OwnRecipeViewController
+            navigationController?.popViewController(animated: true)
         }
-        
-        // Save the recipe (this can be to a backend or local storage)
-        saveRecipe(title: title, ingredients: ingredients, steps: steps)
-        
-        // Navigate back to the previous screen
-        navigationController?.popViewController(animated: true)
     }
 
-    // MARK: - Image Picker for Image Upload
+    // MARK: - Validation
+    private func validateFields() -> Bool {
+        guard let title = recipeTitleTextField.text, !title.isEmpty else {
+            showAlert("Title is required")
+            return false
+        }
+        guard let ingredients = ingredientsTextView.text, !ingredients.isEmpty else {
+            showAlert("Ingredients are required")
+            return false
+        }
+        guard let timeText = timeRequiredTextField.text, !timeText.isEmpty, Int(timeText) != nil else {
+            showAlert("Cooking time is invalid")
+            return false
+        }
+        return true
+    }
+
+    // MARK: - Image Selection
     @objc private func selectImageTapped() {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.sourceType = .photoLibrary
-        present(imagePickerController, animated: true)
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true)
     }
 
-    // MARK: - Helper Methods
-
-    private func saveRecipe(title: String, ingredients: String, steps: String) {
-        // Add logic to save the recipe to the database or local storage
-        print("New recipe saved - Title: \(title), Ingredients: \(ingredients), Steps: \(steps)")
-    }
-
-    private func showAlert(message: String) {
+    // MARK: - Show Error Alert
+    private func showAlert(_ message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
 }
 
+// MARK: - Image Picker Delegates
 extension AddRecipeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[.originalImage] as? UIImage {
-            recipeImageView.image = pickedImage
+        if let selectedImage = info[.originalImage] as? UIImage {
+            recipeImageView.image = selectedImage
         }
         dismiss(animated: true, completion: nil)
     }
