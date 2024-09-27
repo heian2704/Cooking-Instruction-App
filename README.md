@@ -1,4 +1,4 @@
-# Cooking Instruction App 🍳📱
+# Cooking Instruction App 🍳📱 - School Term Project
 
 **Cooking Instruction App** is designed to help beginners improve their cooking skills and manage time efficiently in the kitchen. With easy-to-follow recipes, an integrated timer, and helpful features, the app makes cooking a less stressful experience. Users can browse recipes, create their own, and even find nearby stores for ingredients—all in one place!
 
